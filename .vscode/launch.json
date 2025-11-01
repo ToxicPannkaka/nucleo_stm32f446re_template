@@ -1,0 +1,34 @@
+
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "F446 (OpenOCD, RAM)",
+      "type": "cortex-debug",
+      "request": "launch",
+      "servertype": "openocd",
+      "serverpath": "openocd",
+      "configFiles": ["interface/stlink.cfg", "target/stm32f4x.cfg"],
+
+      "gdbTarget": "localhost:3333",
+      "device": "STM32F446RE",
+      "executable": "${workspaceFolder}/build/ram/${workspaceFolderBasename}.elf",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "make: ram",
+
+      "preLaunchCommands": [
+        "monitor init",
+        "monitor reset halt"
+      ],
+      "postLaunchCommands": [
+      "load",
+      "set {unsigned int}0xE000ED08 = (unsigned int)&__Vectors",
+      "set $sp = _estack",
+      "set $pc = Reset_Handler",
+      "tbreak main",
+      ],
+      "runToEntryPoint": "Reset_Handler",
+      "showDevDebugOutput": "raw"
+    }
+  ]
+}
