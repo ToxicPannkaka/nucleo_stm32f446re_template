@@ -38,5 +38,7 @@ This template contains:
 - ST-Link or similar debugger (optional)
 
 ### Build
-```bash
 make
+
+### Clean
+make clean
