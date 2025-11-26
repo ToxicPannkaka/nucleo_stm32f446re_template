@@ -32,10 +32,6 @@ build/*
 # GDB
 .gdb_history
 
-# Core dumps
-core
-*.core
-
 # VSCode generated stuff 
 .vscode/ipch/
 .vscode/.browse*
