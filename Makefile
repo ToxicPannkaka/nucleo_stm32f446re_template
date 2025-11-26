@@ -18,11 +18,10 @@ TARGET       := $(TARGET_DIR)/$(PROJECT_NAME)
 ######################################
 LTO           ?= 0         # Link Time Optimization
 NANO          ?= 1         # --specs=nano.specs
-SEMIHOSTING   ?= 0         # 1: rdimon (GDB console), 0: nosys (egen retarget)
+SEMIHOSTING   ?= 0         # 1: rdimon (GDB console), 0: nosys (retarget)
 PRINTF_FLOAT  ?= 0         # -u _printf_float (+ _scanf_float)
-USE_USART     ?= 1         # 1: auto-inkludera usart2_init.c + retarget_usart.c
+USE_USART     ?= 1         # 1: auto-include usart2_init.c + retarget_usart.c
 
-# (valfritt) tysta RWX-varningen i RAM-bygge
 NO_RWX_WARN   ?= 0
 
 ######################################
@@ -48,7 +47,6 @@ CSTD  := -std=c11
 OPT   := -O0
 DEBUG := -g3
 
-# Extra -D från kommandorad: make DEFS="-DSTM32F446xx -DUSE_STDPERIPH_DRIVER"
 DEFS  ?=
 
 ######################################
@@ -78,12 +76,12 @@ SRCS_s := $(foreach d,$(SRC_DIRS),$(wildcard $(d)/*.s))
 SRCS_S := $(foreach d,$(SRC_DIRS),$(wildcard $(d)/*.S))
 SRCS   := $(SRCS_c) $(SRCS_s) $(SRCS_S)
 
-# Auto-inkludera USART-moduler vid USE_USART=1
+# Auto-include USART-modules when USE_USART=1
 ifeq ($(USE_USART),1)
-  # Säkerställ SPL/MCU-defines när vi använder SPL-drivare i modulerna
-  SRCS += lib/lelles/src/usart2_init.c lib/lelles/src/retarget_usart.c
-  # Undvik krock med semihostingstubs
-  SEMIHOSTING := 0
+  # Make sure SPL/MCU-defines when SPL-drivers in the modules
+  SRCS += drivers/lelles/src/usart2_init.c drivers/lelles/src/retarget_usart.c
+  # Avoid collision with semihostingstubs 
+SEMIHOSTING := 0
 endif
 
 OBJS := $(patsubst %.c,$(TARGET_DIR)/%.o,$(SRCS_c)) \
