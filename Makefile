@@ -54,11 +54,20 @@ DEFS  ?=
 ######################################
 # DIRECTORIES
 ######################################
-SRC_DIRS   := src lib lib/src lib/lelles/src
-INC_DIRS   := inc lib lib/inc lib/lelles/inc
-LINKER_DIR := linker
-LINKER_SCRIPT := $(LINKER_DIR)/stm32f446re_$(MEMORY_MODEL).ld
+SRC_DIRS := core/startup \
+            core/stdperiph/src \
+            core/system \
+            drivers/lelles/src \
+            src
 
+INC_DIRS := core/include \
+            core/cmsis \
+            core/stdperiph/inc \
+            drivers/lelles/inc \
+            inc
+
+LINKER_DIR := core/linker
+LINKER_SCRIPT := $(LINKER_DIR)/stm32f446re_$(MEMORY_MODEL).ld
 VPATH := $(SRC_DIRS)
 
 ######################################

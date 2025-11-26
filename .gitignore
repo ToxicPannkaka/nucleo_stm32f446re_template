@@ -1,1 +1,59 @@
+# Build directory
+build/
 build/*
+
+# Compiled object files
+*.o
+*.obj
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Compiled dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Executables and firmware binaries
+*.elf
+*.bin
+*.hex
+*.map
+
+# Listing and debug files
+*.lst
+*.lss
+*.out
+
+# Dependency files
+*.d
+
+# GDB
+.gdb_history
+
+# Core dumps
+core
+*.core
+
+# VSCode generated stuff 
+.vscode/ipch/
+.vscode/.browse*
+.vscode/c_cpp_properties.json
+.vscode/settings.json
+.vscode/tasks.json
+
+# Editor/OS junk
+*~
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+
